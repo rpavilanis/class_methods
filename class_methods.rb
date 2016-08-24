@@ -26,13 +26,13 @@
 ###################################
 
 ## INSTANCE VARIABLES
+  ## ATTRIBUTES (instance variables are often attributes of one of the objects - age, relationship status, etc.)
 
 ## INSTANCE METHODS
+  ## behaviors of our class
 
       #INITIALIZE METHOD
 
-
-## ATTRIBUTES
 
 
 # class Order
@@ -63,7 +63,13 @@
 #Class methods are called directly by the class and not by an instance of the class.
 
 
-
+# class Kitten
+#   def self.say_meow
+#     return "meow"
+#   end
+# end
+#
+# puts Kitten.say_meow
 
 
 ###################################
@@ -71,41 +77,48 @@
 ###################################
 
 
-# class Pawn
-#   attr_reader :position
-#   def initialize(position)
-#     @position = position
-#   end
-#
-#   # This is the class method, it starts with self.
-#   # It is only called on the class directly Pawn.make_row
-#   def self.make_row(side)
-#     if side == "white"
-#       num = 2
-#     else
-#       num = 7
-#     end
-#
-#     pawns = []
-#     ("a".."h").each do |letter|
-#       pawns << self.new("#{letter}#{num}")
-#     end
-#
-#     pawns
-#   end
-# end
-#
-# #make one pawn
-# one_pawn = Pawn.new("A2")
-#
-# #make a whole row of pawns
+class Pawn
+  attr_reader :position
+  def initialize(position)
+    @position = position
+  end
+
+  # This is the class method, it starts with self.
+  # It is only called on the class directly Pawn.make_row
+  def self.make_row(side)
+    if side == "white"
+      num = 2
+    else
+      num = 7
+    end
+
+    pawns = []
+    ("a".."h").each do |letter|
+      pawns << self.new("#{letter}#{num}")  #calling itself - making a new object of itself within itself   A new object of pawn is going into array, pawns.
+    end
+
+    pawns
+  end
+end
+
+#make one pawn
+one_pawn = Pawn.new("A2")
+
+one_pawn.make_row("purple") # returns error - doesn't like that we called it on object of class (versus pulling on Pawn class itself, which works)
+
+# #make a whole row of black pawns at the 7th row on chess board
 # pawns = Pawn.make_row("black")
 #
-# #What is being stored in this local variable pawns?
+# #What is being stored in this local variable pawns? - stores all the pawns from else statement in array
 # print pawns
 #
-# #WHAT IS THIS DOING!?
+# #WHAT IS THIS DOING - shuffles them and returns the position of first one from array
 # puts pawns.shuffle.first.position
+
+# pawns - array of pawn objects
+# shuffle - array of pawn objects in different order
+# first - returning first pawn object
+# position - return position of pawn (instance method)
 
 
 
